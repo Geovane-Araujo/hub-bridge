@@ -12,13 +12,15 @@ def bridge(service,method,route):
     token = request.headers.get("Authorization")
     data = request.get_json()
     validaton_token(token)
-    request_post(token, service, route,data)
+    index = request.base_url.index("localhost")
+    request_post(token, service, route,data,index)
     return json.dumps('deu boa')
 
 @hubBridge.route('/rest/anonymous/<string:service>/<string:method>/<string:route>', methods=['GET', 'POST'])
 def bridge_anonimous(service,method,route):
     data = request.get_json()
-    ret = request_post("", service, route, data)
+    index = request.base_url.index("localhost")
+    ret = request_post("", service, route, data,index)
     return json.dumps(ret)
 
 def authorization():
