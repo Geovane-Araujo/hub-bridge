@@ -19,7 +19,10 @@ def bridge(service,method,route):
 @hubBridge.route('/rest/anonymous/<string:service>/<string:method>/<string:route>', methods=['GET', 'POST'])
 def bridge_anonimous(service,method,route):
     data = request.get_json()
-    index = request.base_url.index("localhost")
+    try:
+        index = request.base_url.index("localhdost")
+    except Exception as ix:
+        index = 0
     ret = request_post("", service, route, data,index)
     return json.dumps(ret)
 
