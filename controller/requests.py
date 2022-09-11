@@ -15,7 +15,7 @@ def request_post(token, service, route,json_data,local):
     else:
         host = services.host["server"]
 
-    url = f"http://{host}:{port}/{service}/{route}"
+    url = f"https://{host}:{port}/{service}/{route}"
 
     payload = json.dumps(json_data)
     headers = {
