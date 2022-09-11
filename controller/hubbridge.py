@@ -20,7 +20,7 @@ def bridge(service,method,route):
 def bridge_anonimous(service,method,route):
     data = request.get_json()
     try:
-        index = request.base_url.index("localhdost")
+        index = request.base_url.index("localhost")
     except Exception as ix:
         index = 0
     ret = request_post("", service, route, data,index)

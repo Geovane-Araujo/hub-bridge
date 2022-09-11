@@ -16,4 +16,5 @@ def handle_exception(e):
         "success": False
     })
     response.content_type = "application/json"
-    return response, 401
+    return response, e.code
+
