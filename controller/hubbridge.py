@@ -2,17 +2,26 @@ import json
 
 from flask import Blueprint, request
 
+from controller.requests import request_post
+from controller.validationsecurity import validaton_token
 
 hubBridge = Blueprint("hubbridge",__name__,template_folder="controller")
 
-@hubBridge.route('/hub/<string:service>/<string:method>/<string:route>', methods=['GET', 'POST'])
-#@hubBridge.route('/hub', methods=['GET', 'POST'])
+@hubBridge.route('/rest/<string:service>/<string:method>/<string:route>', methods=['GET', 'POST'])
 def bridge(service,method,route):
-    print(request.headers.get("Authorization"))
-    print(service)
-    print(method)
-    print(route)
-    return json.dumps('deuboa')
+    token = request.headers.get("Authorization")
+    data = request.get_json()
+    validaton_token(token)
+    index = request.base_url.index("localhost")
+    request_post(token, service, route,data,index)
+    return json.dumps('deu boa')
+
+@hubBridge.route('/rest/anonymous/<string:service>/<string:method>/<string:route>', methods=['GET', 'POST'])
+def bridge_anonimous(service,method,route):
+    data = request.get_json()
+    index = request.base_url.index("localhost")
+    ret = request_post("", service, route, data,index)
+    return json.dumps(ret)
 
 def authorization():
     return ''
