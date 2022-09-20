@@ -14,7 +14,7 @@ app.register_blueprint(hubExcept)
 
 @app.route('/')
 def starter():
-    return 'Não Autorizado'
+    return 'Hub-Bridge'
 
 if __name__ == '__main__':
     app.run()
