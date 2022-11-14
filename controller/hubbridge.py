@@ -2,7 +2,7 @@ import json
 
 from flask import Blueprint, request
 
-from controller.requests import request_post
+from controller.requests import request_post, request_post_sob
 from controller.validationsecurity import validaton_token
 
 hubBridge = Blueprint("hubbridge",__name__,template_folder="controller")
@@ -23,7 +23,7 @@ def bridge_anonimous(service,method,route):
         index = request.base_url.index("localhost")
     except Exception as ix:
         index = 0
-    ret = request_post("", service, route, data,index)
+    ret = request_post_sob("", service, route, data,index)
     return json.dumps(ret)
 
 def authorization():
