@@ -48,3 +48,23 @@ def request_post_sob(token, service, route, json_data, local):
     data = res.read()
 
     return data.decode()
+
+def request_bridge(request, any_path):
+
+    data = None
+    if request.method ==  'POST' or request.method == 'PUT':
+        data = request.get_json()
+
+    token = request.headers.get("Authorization")
+
+    payload = json.dumps(data)
+    headers = {
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+    }
+
+    url = "f{}"
+
+    response = requests.request("POST", url, headers=headers, data=payload)
+
+    return response.text
